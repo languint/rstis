@@ -804,6 +804,8 @@ dependencies = [
 name = "rstis"
 version = "0.1.0"
 dependencies = [
+ "gloo-console 0.3.0",
+ "gloo-timers 0.3.0",
  "yew",
 ]
 
