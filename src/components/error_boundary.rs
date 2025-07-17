@@ -2,8 +2,8 @@ use std::panic;
 
 use gloo::events::EventListener;
 use web_sys::wasm_bindgen::JsCast;
-use yew::prelude::*;
 use web_sys::{CustomEvent, CustomEventInit};
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq, Clone)]
 pub struct Props {
@@ -38,13 +38,16 @@ impl Component for ErrorBoundary {
         }));
 
         let link = ctx.link().clone();
-        let panic_listener = EventListener::new(&web_sys::window().unwrap(), "panic", move |event| {
-            if let Some(event) = event.dyn_ref::<CustomEvent>() {
-                let detail = event.detail();
-                let msg = detail.as_string().unwrap_or_else(|| "Unknown error".to_string());
-                link.send_message(Msg::ShowError(msg));
-            }
-        });
+        let panic_listener =
+            EventListener::new(&web_sys::window().unwrap(), "panic", move |event| {
+                if let Some(event) = event.dyn_ref::<CustomEvent>() {
+                    let detail = event.detail();
+                    let msg = detail
+                        .as_string()
+                        .unwrap_or_else(|| "Unknown error".to_string());
+                    link.send_message(Msg::ShowError(msg));
+                }
+            });
 
         Self {
             error: None,

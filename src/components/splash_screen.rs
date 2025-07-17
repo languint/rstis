@@ -1,6 +1,6 @@
+use crate::components::open_elements_context::use_open_elements_context;
 use gloo_timers::callback::Timeout;
 use yew::{function_component, html, use_effect_with, use_state, Html};
-use crate::components::open_elements_context::use_open_elements_context;
 
 pub const SPLASHSCREEN_LINE_DURATION: u32 = 300;
 pub const SPLASHSCREEN_LINE_COUNT: u32 = 6;
@@ -28,11 +28,13 @@ pub fn SplashScreen() -> Html {
             let done_timeout = Timeout::new(
                 ((SPLASHSCREEN_LINE_COUNT + 2) * SPLASHSCREEN_LINE_DURATION) as u32,
                 move || {
-                    open_ctx.state.set(crate::components::open_elements_context::OpenElements {
-                        show_splash: false,
-                        show_title: true,
-                        show_scenario_wall: false,
-                    });
+                    open_ctx
+                        .state
+                        .set(crate::components::open_elements_context::OpenElements {
+                            show_splash: false,
+                            show_title: true,
+                            show_scenario_wall: false,
+                        });
                 },
             );
             timeouts.push(done_timeout);

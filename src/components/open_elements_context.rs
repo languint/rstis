@@ -39,7 +39,7 @@ pub type OpenElementsContextProvider = UseReducerHandle<OpenElements>;
 
 #[hook]
 pub fn use_open_elements_context() -> OpenElementsContext {
-    let state = use_context::<UseStateHandle<OpenElements>>()
-        .expect("OpenElementsContext not found");
+    let state =
+        use_context::<UseStateHandle<OpenElements>>().expect("OpenElementsContext not found");
     OpenElementsContext { state }
 }

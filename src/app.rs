@@ -1,11 +1,8 @@
 use yew::prelude::*;
 
 use crate::components::{
-    error_boundary::ErrorBoundary,
-    scenario_wall::ScenarioWall,
-    splash_screen::{SplashScreen},
-    title_screen::TitleScreen,
-    open_elements_context::OpenElements,
+    error_boundary::ErrorBoundary, open_elements_context::OpenElements,
+    scenario_wall::ScenarioWall, splash_screen::SplashScreen, title_screen::TitleScreen,
 };
 
 #[function_component(App)]
@@ -25,7 +22,8 @@ pub fn app() -> Html {
 
 #[function_component(InnerApp)]
 fn inner_app() -> Html {
-    let open_ctx = use_context::<UseStateHandle<OpenElements>>().expect("OpenElements context missing");
+    let open_ctx =
+        use_context::<UseStateHandle<OpenElements>>().expect("OpenElements context missing");
 
     html! {
         <ErrorBoundary>

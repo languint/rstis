@@ -1,5 +1,5 @@
-use yew::{function_component, html, Callback, Html};
 use crate::components::open_elements_context::use_open_elements_context;
+use yew::{function_component, html, Callback, Html};
 
 #[function_component]
 pub fn TitleScreen() -> Html {
@@ -8,11 +8,13 @@ pub fn TitleScreen() -> Html {
     let onclick = {
         let open_ctx = open_ctx.clone();
         Callback::from(move |_| {
-            open_ctx.state.set(crate::components::open_elements_context::OpenElements {
-                show_splash: false,
-                show_title: false,
-                show_scenario_wall: true,
-            });
+            open_ctx
+                .state
+                .set(crate::components::open_elements_context::OpenElements {
+                    show_splash: false,
+                    show_title: false,
+                    show_scenario_wall: true,
+                });
         })
     };
 

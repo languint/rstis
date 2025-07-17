@@ -1,5 +1,5 @@
-use yew::{function_component, html, Html};
 use crate::components::open_elements_context::use_open_elements_context;
+use yew::{function_component, html, Html};
 
 #[function_component]
 pub fn ScenarioWall() -> Html {
