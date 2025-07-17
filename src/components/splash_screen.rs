@@ -1,5 +1,6 @@
 use gloo_timers::callback::Timeout;
 use yew::{function_component, html, use_effect_with, use_state, Html};
+use crate::components::open_elements_context::use_open_elements_context;
 
 pub const SPLASHSCREEN_LINE_DURATION: u32 = 300;
 pub const SPLASHSCREEN_LINE_COUNT: u32 = 6;
@@ -7,11 +8,11 @@ pub const SPLASHSCREEN_LINE_COUNT: u32 = 6;
 #[function_component]
 pub fn SplashScreen() -> Html {
     let active_lines = use_state(|| 0);
-    let is_done = use_state(|| false);
+    let open_ctx = use_open_elements_context();
 
     {
         let active_lines = active_lines.clone();
-        let is_done = is_done.clone();
+        let open_ctx = open_ctx.clone();
         use_effect_with((), move |_| {
             let mut timeouts = Vec::new();
 
@@ -23,11 +24,15 @@ pub fn SplashScreen() -> Html {
                 timeouts.push(timeout);
             }
 
-            let is_done = is_done.clone();
+            let open_ctx = open_ctx.clone();
             let done_timeout = Timeout::new(
                 ((SPLASHSCREEN_LINE_COUNT + 2) * SPLASHSCREEN_LINE_DURATION) as u32,
                 move || {
-                    is_done.set(true);
+                    open_ctx.state.set(crate::components::open_elements_context::OpenElements {
+                        show_splash: false,
+                        show_title: true,
+                        show_scenario_wall: false,
+                    });
                 },
             );
             timeouts.push(done_timeout);
@@ -40,8 +45,10 @@ pub fn SplashScreen() -> Html {
         });
     }
 
+    let hidden = !open_ctx.state.show_splash;
+
     html! {
-        <div class={if *is_done {"splashscreen hidden"} else {"splashscreen"}}>
+        <div class={if hidden {"splashscreen hidden"} else {"splashscreen"}}>
             <div class="splashscreen-text">
                 <span class={if *active_lines >= 1 {"splashscreen-active"} else {"splashscreen-inactive"}}>{"          _   _     "}</span>
                 <span class={if *active_lines >= 2 {"splashscreen-active"} else {"splashscreen-inactive"}}>{"         | | (_)    "}</span>
