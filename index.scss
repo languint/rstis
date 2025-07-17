@@ -1,0 +1,58 @@
+$red: #FF6188;
+$orange: #FC9867;
+$yellow: #FFD866;
+$green: #A9DC76;
+$light-blue: #78DCE8;
+$blue: #6186d6;
+$purple: #AB9DF2;
+$base: #221F22;
+$darker: #19181A;
+$elevated-0: #2D2A2E;
+$elevated-1: #403E41;
+$text: #FCFCFA;
+
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-color: $darker;
+    font-family: monospace;
+    color: $text;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splashscreen {
+    position: absolute;
+    min-width: fit-content;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.splashscreen.fade-out {
+    opacity: 0;
+}
+
+.splashscreen-active {
+    color: $orange;
+}
+
+.splashscreen-inactive {
+    color: $elevated-1;
+}
+
+.splashscreen-text span {
+    display: block;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    font-size: x-large;
+}
