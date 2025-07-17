@@ -12,7 +12,7 @@ $elevated-1: #403E41;
 $text: #FCFCFA;
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 button {
@@ -28,6 +28,9 @@ body {
     background-color: $darker;
     font-family: monospace;
     color: $text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .app {
@@ -77,6 +80,9 @@ body {
 }
 
 .title-screen button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border: 1px solid $elevated-1;
     background-color: $darker;
     color: $text;
@@ -97,4 +103,26 @@ body {
     color: $darker;
     border: 1px solid $darker;
     outline: none;
+}
+
+.title-screen button .material-symbols-outlined {
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+}
+
+.material-symbols-outlined {
+    vertical-align: bottom;
+    font-size: 1em;
+    line-height: 1;
+}
+
+.panic-boundary {
+    display: flex;
+    width: fit-content;
+    border: $red 1px solid;
+    color: $red;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
 }
