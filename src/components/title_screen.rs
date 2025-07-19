@@ -1,4 +1,4 @@
-use crate::components::open_elements_context::use_open_elements_context;
+use crate::context::open_elements_context::use_open_elements_context;
 use yew::{function_component, html, Callback, Html};
 
 #[function_component]
@@ -10,7 +10,7 @@ pub fn TitleScreen() -> Html {
         Callback::from(move |_| {
             open_ctx
                 .state
-                .set(crate::components::open_elements_context::OpenElements {
+                .set(crate::context::open_elements_context::OpenElements {
                     show_splash: false,
                     show_title: false,
                     show_scenario_wall: true,

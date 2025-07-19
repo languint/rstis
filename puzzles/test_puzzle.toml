@@ -1,0 +1,7 @@
+[meta]
+title = "Test Puzzle"
+description = "A puzzle for testing purposes"
+status = "InProgress"
+[data]
+tests = [{ label = "out", expected = [1, 2, 3] }]
+nodes = []

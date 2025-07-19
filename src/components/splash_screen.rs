@@ -1,4 +1,4 @@
-use crate::components::open_elements_context::use_open_elements_context;
+use crate::context::open_elements_context::use_open_elements_context;
 use gloo_timers::callback::Timeout;
 use yew::{function_component, html, use_effect_with, use_state, Html};
 
@@ -30,7 +30,7 @@ pub fn SplashScreen() -> Html {
                 move || {
                     open_ctx
                         .state
-                        .set(crate::components::open_elements_context::OpenElements {
+                        .set(crate::context::open_elements_context::OpenElements {
                             show_splash: false,
                             show_title: true,
                             show_scenario_wall: false,
