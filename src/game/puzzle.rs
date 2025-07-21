@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-use crate::game::node::Node;
+use crate::game::node::{Node, NodeType};
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub enum PuzzleStatus {
@@ -27,22 +27,30 @@ impl PuzzleStatus {
 }
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
-pub struct PuzzleTest {
+pub struct PuzzleInput {
     pub label: String,
-    pub expected: Vec<i32>,
+    pub input: Vec<i32>,
+    pub into_node_id: usize,
+}
+
+#[derive(Clone, PartialEq, Deserialize, Debug)]
+pub struct PuzzleOutput {
+    pub label: String,
+    pub output: Vec<i32>,
+    pub from_node_id: usize,
 }
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct PuzzleMeta {
     pub title: String,
     pub description: String,
-    pub status: PuzzleStatus,
 }
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct PuzzleData {
-    pub tests: Vec<PuzzleTest>,
-    pub nodes: Vec<Node>,
+    pub inputs: Vec<PuzzleInput>,
+    pub outputs: Vec<PuzzleOutput>,
+    pub node_types: Vec<NodeType>,
 }
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
@@ -52,10 +60,14 @@ pub struct Puzzle {
 }
 
 impl Puzzle {
-    pub fn load_from_toml(toml_str: &str) -> Result<Self, String> {
-        match toml::from_str(toml_str) {
+    pub fn load_from_json(json_str: &str) -> Result<Self, String> {
+        match serde_json::from_str(json_str) {
             Ok(puzzle) => Ok(puzzle),
-            Err(e) => Err(format!("Failed to parse TOML: {}", e)),
+            Err(e) => Err(format!("Failed to parse JSON: {}", e)),
         }
+    }
+
+    pub fn get_local_storage_status(&self) -> PuzzleStatus {
+        PuzzleStatus::InProgress
     }
 }

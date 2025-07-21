@@ -30,26 +30,26 @@ pub fn app() -> Html {
         use_effect_with((), move |_| {
             let mut loaded_puzzles = Vec::new();
             let puzzle_files = [
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
-                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
+                include_str!("../puzzles/test_puzzle.json"),
             ];
-            for toml_str in puzzle_files.iter() {
-                match Puzzle::load_from_toml(toml_str) {
+            for json_str in puzzle_files.iter() {
+                match Puzzle::load_from_json(json_str) {
                     Ok(puzzle) => loaded_puzzles.push(puzzle),
-                    Err(e) => gloo_console::error!(format!("Failed to load puzzle: {}", e)),
+                    Err(e) => gloo_console::error!("Failed to load puzzle: {}", e),
                 }
             }
             game_state.set(GameState {
@@ -61,11 +61,13 @@ pub fn app() -> Html {
     }
 
     html! {
-        <ContextProvider<UseStateHandle<OpenElements>> context={open_elements.clone()}>
-            <ContextProvider<UseStateHandle<GameState>> context={game_state.clone()}>
-                <InnerApp />
-            </ContextProvider<UseStateHandle<GameState>>>
-        </ContextProvider<UseStateHandle<OpenElements>>>
+        <ErrorBoundary>
+            <ContextProvider<UseStateHandle<OpenElements>> context={open_elements.clone()}>
+                <ContextProvider<UseStateHandle<GameState>> context={game_state.clone()}>
+                    <InnerApp />
+                </ContextProvider<UseStateHandle<GameState>>>
+            </ContextProvider<UseStateHandle<OpenElements>>>
+        </ErrorBoundary>
     }
 }
 
@@ -78,12 +80,10 @@ fn inner_app() -> Html {
         use_context::<UseStateHandle<GameState>>().expect("GameState context missing");
 
     html! {
-        <ErrorBoundary>
-            <div class="app">
-                { if open_ctx.show_splash { html! { <SplashScreen /> } } else { html! {} } }
-                <ScenarioWall />
-                <TitleScreen />
-            </div>
-        </ErrorBoundary>
+        <div class="app">
+            { if open_ctx.show_splash { html! { <SplashScreen /> } } else { html! {} } }
+            <ScenarioWall />
+            <TitleScreen />
+        </div>
     }
 }

@@ -50,7 +50,6 @@ impl GameStateContext {
 
 #[hook]
 pub fn use_game_state_context() -> GameStateContext {
-    let state =
-        use_context::<UseStateHandle<GameState>>().expect("GameStateContext not found");
+    let state = use_context::<UseStateHandle<GameState>>().expect("GameStateContext not found");
     GameStateContext { state }
 }

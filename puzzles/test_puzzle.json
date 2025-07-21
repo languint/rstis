@@ -1,0 +1,32 @@
+{
+    "meta": {
+        "title": "Test Puzzle",
+        "description": "This is a test puzzle."
+    },
+    "data": {
+        "node_types": [
+            "Execution", "Execution", "Execution", "Blocked",
+            "Blocked",   "Execution", "Execution", "Blocked",
+            "Execution", "Execution", "Execution", "Execution"
+        ],
+        "inputs": [
+            {
+                "label": "IN.A",
+                "input": [1, 2, 3],
+                "into_node_id": 1
+            },
+            {
+                "label": "IN.B",
+                "input": [4, 5, 6],
+                "into_node_id": 2
+            }
+        ],
+        "outputs": [
+            {
+                "label": "OUT.A",
+                "output": [5, 7, 9],
+                "from_node_id": 10
+            }
+        ]
+    }
+}

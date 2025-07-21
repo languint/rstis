@@ -34,11 +34,13 @@ pub struct ScenarioWallPuzzleProps {
 #[function_component]
 pub fn ScenarioWallPuzzle(props: &ScenarioWallPuzzleProps) -> Html {
     let puzzle = &props.puzzle;
+    let puzzle_status = puzzle.get_local_storage_status();
+
     html! {
         <div class="scenario-wall-puzzle">
             <h3>{&puzzle.meta.title}</h3>
             <p>{&puzzle.meta.description}</p>
-            <p class={format!("puzzle-status {}", &puzzle.meta.status.get_class())}>{&puzzle.meta.status.to_string()}</p>
+            <p class={format!("puzzle-status {}", puzzle_status.get_class())}>{puzzle_status.to_string()}</p>
         </div>
     }
 }

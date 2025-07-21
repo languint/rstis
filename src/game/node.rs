@@ -51,7 +51,7 @@ pub struct NodeElementProps {
 pub fn NodeElement(props: &NodeElementProps) -> Html {
     html! {
         <div class="node">
-            
+
         </div>
     }
 }
