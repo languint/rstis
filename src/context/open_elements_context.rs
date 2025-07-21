@@ -5,6 +5,7 @@ pub struct OpenElements {
     pub show_splash: bool,
     pub show_title: bool,
     pub show_scenario_wall: bool,
+    pub show_game: bool,
 }
 
 #[derive(Clone, PartialEq)]
@@ -29,6 +30,12 @@ impl OpenElementsContext {
     pub fn set_show_scenario_wall(&self, value: bool) {
         self.state.set(OpenElements {
             show_scenario_wall: value,
+            ..(*self.state).clone()
+        });
+    }
+    pub fn set_show_game(&self, value: bool) {
+        self.state.set(OpenElements {
+            show_game: value,
             ..(*self.state).clone()
         });
     }

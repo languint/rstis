@@ -15,6 +15,7 @@ pub fn app() -> Html {
         show_splash: true,
         show_title: false,
         show_scenario_wall: false,
+        show_game: false,
     });
 
     let game_state = use_state(|| GameState {

@@ -14,6 +14,7 @@ pub fn TitleScreen() -> Html {
                     show_splash: false,
                     show_title: false,
                     show_scenario_wall: true,
+                    show_game: false,
                 });
         })
     };

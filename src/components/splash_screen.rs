@@ -34,6 +34,7 @@ pub fn SplashScreen() -> Html {
                             show_splash: false,
                             show_title: true,
                             show_scenario_wall: false,
+                            show_game: false,
                         });
                 },
             );
