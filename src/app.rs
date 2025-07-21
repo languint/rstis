@@ -17,7 +17,6 @@ pub fn app() -> Html {
         show_scenario_wall: false,
     });
 
-
     let game_state = use_state(|| GameState {
         current_puzzle: None,
         loaded_puzzles: Vec::new(),
@@ -25,13 +24,26 @@ pub fn app() -> Html {
         is_running: false,
     });
 
-    // Load puzzles from /puzzles at startup
     {
         let game_state = game_state.clone();
 
         use_effect_with((), move |_| {
             let mut loaded_puzzles = Vec::new();
             let puzzle_files = [
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
+                include_str!("../puzzles/test_puzzle.toml"),
                 include_str!("../puzzles/test_puzzle.toml"),
             ];
             for toml_str in puzzle_files.iter() {

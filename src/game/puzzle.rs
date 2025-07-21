@@ -17,6 +17,15 @@ impl ToString for PuzzleStatus {
     }
 }
 
+impl PuzzleStatus {
+    pub fn get_class(&self) -> String {
+        match self {
+            PuzzleStatus::InProgress => "in-progress".to_string(),
+            PuzzleStatus::Completed => "completed".to_string(),
+        }
+    }
+}
+
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct PuzzleTest {
     pub label: String,
